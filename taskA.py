@@ -54,8 +54,9 @@ def validate(val_loader, model, criterion, use_cuda):
 
     end = time.time()
     for i, (input, target) in enumerate(val_loader):
-        input_var = torch.autograd.Variable(input)
-        target_var = torch.autograd.Variable(target)
+        with torch.no_grad():
+            input_var = torch.autograd.Variable(input)
+            target_var = torch.autograd.Variable(target)
         if use_cuda:
             input_var = input_var.cuda()
             target_var = target_var.cuda()
