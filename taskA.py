@@ -51,7 +51,7 @@ def validate(val_loader, model, criterion, use_cuda):
 
     # switch to evaluate mode
     model.eval()
-
+    model.class_to_idx = val_loader.dataset.class_to_idx
     end = time.time()
     for i, (input, target) in enumerate(val_loader):
         with torch.no_grad():
@@ -132,7 +132,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--image-size', type=int, default=299)
-    parser.add_argument('--batch-size', type=int, default=32)
+    parser.add_argument('--batch-size', type=int, default=16)
     parser.add_argument('--n-workers', type=int, default=4)
     parser.add_argument('--out-path', type=str, default='./output')
 
